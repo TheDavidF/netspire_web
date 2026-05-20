@@ -3,10 +3,13 @@ require("dotenv").config();
 const app = require("./src/app");
 const sequelize = require("./src/config/database");
 
+//import de modelos para sincronizar con la base de datos
+require("./src/models");
+
 const PORT = process.env.PORT || 3000;
 
 sequelize
-  .authenticate()
+  .sync({ alter: true })
   .then(() => {
     console.log("Conexión a MySQL exitosa");
 
