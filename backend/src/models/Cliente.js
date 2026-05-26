@@ -29,6 +29,7 @@ const Cliente = sequelize.define(
       type: DataTypes.INTEGER,
       defaultValue: 1,
     },
+
   },
   {
     tableName: "clientes",

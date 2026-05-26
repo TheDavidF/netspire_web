@@ -5,34 +5,61 @@ const Pago = require("./Pago");
 const Ticket = require("./Ticket");
 const Instalacion = require("./Instalacion");
 
+// usuario - cliente
 
-// Relaciones
+Cliente.belongsTo(Usuario, {
+  foreignKey: "usuarioId",
+});
 
-//usuario - cliente
-Cliente.belongsTo(Usuario);
-Usuario.hasOne(Cliente);
+Usuario.hasOne(Cliente, {
+  foreignKey: "usuarioId",
+});
 
-//cliente - plan
-Cliente.belongsTo(Plan);
-Plan.hasMany(Cliente);
+// cliente - plan
 
-//cliente - pago
-Pago.belongsTo(Cliente);
-Cliente.hasMany(Pago);
+Cliente.belongsTo(Plan, {
+  foreignKey: "planId",
+});
 
-//cliente - ticket
-Ticket.belongsTo(Cliente);
-Cliente.hasMany(Ticket);
+Plan.hasMany(Cliente, {
+  foreignKey: "planId",
+});
 
-//cliente - instalacion
-Instalacion.belongsTo(Cliente);
-Cliente.hasMany(Instalacion);
+// cliente - pago
+
+Pago.belongsTo(Cliente, {
+  foreignKey: "clienteId",
+});
+
+Cliente.hasMany(Pago, {
+  foreignKey: "clienteId",
+});
+
+// cliente - ticket
+
+Ticket.belongsTo(Cliente, {
+  foreignKey: "clienteId",
+});
+
+Cliente.hasMany(Ticket, {
+  foreignKey: "clienteId",
+});
+
+// cliente - instalacion
+
+Instalacion.belongsTo(Cliente, {
+  foreignKey: "clienteId",
+});
+
+Cliente.hasMany(Instalacion, {
+  foreignKey: "clienteId",
+});
 
 module.exports = {
-    Usuario,
-    Plan,
-    Cliente,
-    Pago,
-    Ticket,
-    Instalacion,
+  Usuario,
+  Plan,
+  Cliente,
+  Pago,
+  Ticket,
+  Instalacion,
 };

@@ -9,7 +9,7 @@ require("./src/models");
 const PORT = process.env.PORT || 3000;
 
 sequelize
-  .sync({ alter: true })
+  .sync()
   .then(() => {
     console.log("Conexión a MySQL exitosa");
 

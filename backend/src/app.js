@@ -1,13 +1,23 @@
 const express = require("express");
 const cors = require("cors");
 
+const authRoutes = require("./routes/auth.routes");
+
+const testRoutes = require("./routes/test.routes");
+
+const planesRoutes = require("./routes/planes.routes");
+
+const clientesRoutes = require("./routes/clientes.routes");
+const pagosRoutes = require("./routes/pagos.routes");
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("API funcionando correctamente");
-});
+app.use("/api/auth", authRoutes);
+app.use("/api/test", testRoutes);
+app.use("/api/planes", planesRoutes);
+app.use("/api/clientes", clientesRoutes);
+app.use("/api/pagos", pagosRoutes);
 
 module.exports = app;
