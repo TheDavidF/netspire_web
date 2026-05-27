@@ -5,7 +5,7 @@ const Cliente = require("../models/Cliente");
 
 const updateInstalacion = async (req, res) => {
   const { id } = req.params;
-  const { fecha_realizadad, estado, notas } = req.body;
+  const { estado, notas } = req.body;
     try {
         const instalacion = await Instalacion.findByPk(id);
         if (!instalacion) {
@@ -19,7 +19,10 @@ const updateInstalacion = async (req, res) => {
                 message: "Estado no válido"
             });
         }
-        instalacion.fecha_realizadad = fecha_realizadad;
+
+        if(estado === "COMPLETADA"){
+            instalacion.fecha_realizadad = new Date();
+        } 
         instalacion.estado = estado;
         instalacion.notas = notas;
         await instalacion.save();
