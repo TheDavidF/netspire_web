@@ -55,6 +55,16 @@ Cliente.hasMany(Instalacion, {
   foreignKey: "clienteId",
 });
 
+// ticket - tecnico
+
+Ticket.belongsTo(Usuario, {
+  foreignKey: "tecnicoId",
+});
+
+Usuario.hasMany(Ticket, {
+  foreignKey: "tecnicoId",
+});
+
 module.exports = {
   Usuario,
   Plan,
