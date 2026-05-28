@@ -1,5 +1,6 @@
 const Cliente = require("../models/Cliente");
 const Usuario = require("../models/Usuario");
+const Plan = require("../models/Plan");
 const bcrypt = require("bcryptjs");
 
 const changeStatus = async (req, res) => {
@@ -80,15 +81,58 @@ const createCliente = async (req, res) => {
 };
 
 const getClientes = async (req, res) => {
+
   try {
-    const clientes = await Cliente.findAll();
-    res.json(clientes);
-  } catch (error) {
-    res.status(500).json({
-      message: "Error al obtener los clientes",
-      error: error.message,
+
+    const clientes = await Cliente.findAll({
+
+      include: [
+
+        {
+          model: Usuario,
+
+          attributes: [
+            "id",
+            "nombre",
+            "email",
+            "rol",
+            "activo",
+          ],
+        },
+
+        {
+          model: Plan,
+
+          attributes: [
+            "id",
+            "nombre",
+            "precio_mensual",
+            "velocidad_mbps",
+          ],
+        },
+
+      ],
+
     });
+
+    res.json({
+
+      clientes,
+
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+
+      message: "Error al obtener los clientes",
+
+      error: error.message,
+
+    });
+
   }
+
 };
 
 const getClienteById = async (req, res) => {

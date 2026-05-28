@@ -14,6 +14,8 @@ const ticketsRoutes = require("./routes/tickets.routes");
 
 const instalacionesRoutes = require("./routes/instalaciones.routes");
 
+const dashboardRoutes = require("./routes/dashboard.routes");
+
 const app = express();
 
 app.use(cors());
@@ -25,5 +27,6 @@ app.use("/api/clientes", clientesRoutes);
 app.use("/api/pagos", pagosRoutes);
 app.use("/api/tickets", ticketsRoutes);
 app.use("/api/instalaciones", instalacionesRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 module.exports = app;
